@@ -1,0 +1,43 @@
+@import '../../sass/colors.scss';
+
+.monthday-container {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      height: 7rem;
+      border: 1px solid #ccc;
+      
+      margin: 0;
+      padding: 0 1em;
+      &.weekday {
+            background-color: color('neutral', '100');
+            .title {   
+                  font-weight: bold;
+                  &.current {
+                        color: color('neutral', '1000');
+                  }
+                  &.not-current {
+                        color: color('neutral', '500');
+                  }
+                  
+            }
+      }
+
+      &.weekend {
+            background-color: color('neutral', '200');
+            font-weight: bold;
+            .title {
+                  
+                  font-weight: bold;
+                  &.current {
+                        color: color('main', 'secondary');
+                  }
+                  &.not-current {
+                        color: color('neutral', '500');
+                  }
+                  
+            }
+      }
+      
+}
+

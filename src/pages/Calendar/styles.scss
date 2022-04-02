@@ -1,5 +1,14 @@
-.header {
+.calendar-content {
       display: flex;
-      flex-flow: row;
-      width: 100%;
+      flex-direction: column;
+      .header {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+      }
+      .body {
+            display: grid;
+            grid-template-columns: repeat( auto-fit, minmax(14%, 1fr) ); 
+            
+      }
 }

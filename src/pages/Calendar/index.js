@@ -1,20 +1,34 @@
-import React from 'react';
-import WeekDay from '../../components/WeekDay';
-import {weekdays} from './utils'
-import './styles.scss';
+import React from "react";
+import WeekDay from "../../components/WeekDay";
+import { weekDays, calendar } from "./utils";
+import "./styles.scss";
+import MonthDay from "../../components/MonthDay";
 
 function Calendar(props) {
-  // your calendar implementation Goes here!
-  // Be creative 
   return (
     <div className="container">
-        <h1>Calendar</h1>
+      <h1>Calendar</h1>
 
-        <div className='header'>
-          { weekdays.map(weekday => ( <WeekDay title={weekday}/>))}
+      <div className="calendar-content">
+        <div className="header">
+          {weekDays.map((weekday) => (
+            <WeekDay title={weekday} />
+          ))}
         </div>
+
+        <div className="body">
+          {calendar["2022"].April.days.map((monthday, index) => (
+            <MonthDay
+              key={index}
+              title={monthday.day}
+              type={monthday.type}
+              currentMonth={monthday.currentMonth}
+            />
+          ))}
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
 export default Calendar;
