@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import genericReducer from "./generics.slice";
+import calendarReducer from "./calendar.slice";
 
 export default combineReducers({
-  genericReducer
+  calendarReducer
 });

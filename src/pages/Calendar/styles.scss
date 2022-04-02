@@ -7,8 +7,13 @@
             width: 100%;
       }
       .body {
+            margin: 0;
             display: grid;
             grid-template-columns: repeat( auto-fit, minmax(14%, 1fr) ); 
             
+      }
+      .footer {
+            display: flex;
+            justify-content: flex-end;
       }
 }

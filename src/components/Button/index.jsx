@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import './styles.scss'
 
 function Button(props) {
   const { onClick, children } = props;
 
-  return <button onClick={onClick}>{children}</button>;
+  return <button className='calendar-button' onClick={onClick}>{children}</button>;
 }
 
 Button.propTypes = {

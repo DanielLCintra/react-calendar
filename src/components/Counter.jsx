@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Button from "./Button";
+import Button from "./Button/index.jsx";
 
 function Counter({ limit }) {
   const [count, setCount] = React.useState(0);

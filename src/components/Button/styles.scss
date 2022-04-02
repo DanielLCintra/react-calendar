@@ -1,0 +1,27 @@
+@import '../../sass/colors.scss';
+
+.calendar-button {
+      background-color: color('main', 'default');
+      color: color('neutral', '100');
+      border: 0;
+      border-radius: 4px;
+      height: 3rem;
+      font-family: arial;
+      font-size:14px;
+      font-weight:700;
+      text-transform: uppercase;
+      border:none;
+      padding:10px;
+      cursor: pointer;
+      display:inline-block;
+      text-decoration: none;
+      box-shadow:0 5px 0 color('main', 'dark');
+      &:hover {
+            background-color: color('main', 'secondary');
+      }
+      &:active{
+            position:relative;
+            top:5px;
+            box-shadow:none;
+          }
+}
