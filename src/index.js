@@ -1,22 +1,28 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from "react-router-dom";
 import { Provider as ReduxProvider } from "react-redux";
-import getStore from "./store/getStore";
-import reducers from './reducers';
-import Main from './Main';
+import reducers from "./store/slices";
+import Main from "./Main";
 import reportWebVitals from "./reportWebVitals";
-
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import thunk from "redux-thunk";
 
 // import main sass file
 import "./sass/app.scss";
 
+const store = configureStore({
+  reducer: reducers,
+  devTools: true,
+  middleware: [...getDefaultMiddleware(), thunk]
+});
+
 ReactDOM.render(
   <React.StrictMode>
-    <ReduxProvider store={getStore(reducers)}>
-	    <BrowserRouter>
-	      <Main />
-	    </BrowserRouter>
+    <ReduxProvider store={store}>
+      <BrowserRouter>
+        <Main />
+      </BrowserRouter>
     </ReduxProvider>
   </React.StrictMode>,
   document.getElementById("root")

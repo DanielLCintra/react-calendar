@@ -1,0 +1,15 @@
+@import '../../sass/colors.scss';
+
+.weekday-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: color('main', 'default');
+      .title {
+            color: color('neutral', '100');
+      }
+      margin: 0;
+      padding: 0;
+      flex:1;
+}
+
