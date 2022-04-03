@@ -18,11 +18,12 @@ $colors: (
     "900": #1A2237,
     "1000": #000000,
   ),
-  "state": (
-    "danger": #FF2D55,
-    "success": #08B08B,
-    "warning": #F58C3D, 
+  "danger": (
+    "light":  #FF2D55,
+    "dark": #b61c39,
   ),
+  "success": #08B08B,
+  "warning": #F58C3D, 
 );
 
 @function color($color: 'primary', $variant: 'default') {
