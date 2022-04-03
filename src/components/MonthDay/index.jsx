@@ -14,7 +14,9 @@ function MonthDay(props) {
         <ul>
           {reminders.length > 0 &&
             reminders.map((reminder, index) => (
-              <li className='text' key={index}>{reminder.hour} - {reminder.description}</li>
+              <li className="text" key={index}>
+                {reminder.time} - {reminder.title}
+              </li>
             ))}
         </ul>
       </div>

@@ -10,7 +10,7 @@ export const weekDays = [
 
 export const calendar = {
   2022: {
-    April: {
+    4: {
       days: [
         { day: "27", type: "weekend", currentMonth: false, reminders: [] },
         { day: "28", type: "weekday", currentMonth: false, reminders: [] },

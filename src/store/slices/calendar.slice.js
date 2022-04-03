@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { calendar, weekDays } from "../../utils.js";
+import moment from "moment";
 
 const calendarSlice = createSlice({
   name: "calendar",
@@ -10,11 +11,18 @@ const calendarSlice = createSlice({
   reducers: {
     addReminder(
       state,
-      { payload: { year, month, day, hour, description, city } }
+      { payload: { date, time, title, city } }
     ) {
+      const check = moment(date, 'YYYY-MM-DD');
+      const month = check.format('M').toString();
+      const day = check.format('DD').toString();
+      const year = check.format('YYYY').toString();
+
+      console.log('date', year + ' ' + month + ' ' + day)
+
       state.calendar[year][month].days
         .find((d) => d.day === day)
-        .reminders.push({ hour, description, city });
+        .reminders.push({ id: Date.now() ,time, title, city, date });
     }
   }
 });
