@@ -43,6 +43,9 @@ function ReminderRegisterModal(props) {
             onChange={(e) =>
               setReminder({ ...reminder, title: e.target.value })
             }
+            id="title" 
+            name="title"
+            maxlength="30"
           />
         </div>
 
@@ -63,6 +66,8 @@ function ReminderRegisterModal(props) {
                 setweatherData(weatherForecast.data);
               }
             }}
+            id="date" 
+            name="date"
           />
         </div>
 
@@ -73,6 +78,8 @@ function ReminderRegisterModal(props) {
             type="time"
             value={reminder.time || ""}
             onChange={(e) => setReminder({ ...reminder, time: e.target.value })}
+            id="time" 
+            name="time"
           />
         </div>
 
@@ -95,6 +102,8 @@ function ReminderRegisterModal(props) {
                 setweatherData(weatherForecast.data);
               }
             }}
+            id="city" 
+            name="city"
           />
         </div>
 
