@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import WeekDay from "../../components/WeekDay";
 import { useSelector } from "react-redux";
 import "./styles.scss";
 import MonthDay from "../../components/MonthDay";
 import Button from "../../components/Button/index.jsx";
 import ReminderRegisterModal from "../../components/ReminderRegisterModal";
-import { toggleShowRegisterModal } from "../../store/slices/calendar.slice";
+import { clearCurrentReminder, setAlreadyNotified, toggleShowRegisterModal } from "../../store/slices/calendar.slice";
 import { useDispatch } from "react-redux";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 
 function Calendar(props) {
@@ -14,8 +15,35 @@ function Calendar(props) {
   const dispatch = useDispatch();
 
 
+  useEffect(() => {
+    setInterval(() => {
+      const currentdate = new Date(); 
+
+      const day = currentdate.getDate();
+      const month = currentdate.getMonth() + 1;
+      const year = currentdate.getFullYear();
+      const hour = currentdate.getHours(); 
+      const minute = currentdate.getMinutes();
+
+      calendar[year][month].days?.find(d => d.day == day).reminders?.forEach(r => {
+        if (r?.time) {
+          const arrHour = r.time.split(':');
+
+          if (arrHour[0] == hour && arrHour[1] == minute && !r.notified) {
+            NotificationManager.info(r.title);
+            dispatch(setAlreadyNotified({date: r.date, id: r.id}))
+          }
+        }
+        
+      })
+    }, 10000);
+  }, [calendar, dispatch])
+  
+
+
   return (
     <div className="container">
+      <NotificationContainer/>
       {showRegisterModal && (
         <ReminderRegisterModal
           title="Reminder`s Register"
@@ -44,14 +72,18 @@ function Calendar(props) {
         </div>
 
         <div className="footer">
-          <Button
-            colorState="default"
-            onClick={() =>
-              dispatch(toggleShowRegisterModal({state: true}))
-            }
-          >
-            Add Reminder
-          </Button>
+          {!showRegisterModal && (
+            <Button
+              colorState="default"
+              onClick={() => {
+                dispatch(clearCurrentReminder())
+                dispatch(toggleShowRegisterModal({state: true}))
+              }
+              }
+            >
+              Add Reminder
+            </Button>
+          )}
         </div>
       </div>
     </div>

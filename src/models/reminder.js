@@ -1,1 +1,1 @@
-export const REMINDER_MODEL = { id: "",date: "", hour: "", title: "", city: "" };
+export const REMINDER_MODEL = { id: "",date: "", hour: "", title: "", city: "", notified: false };

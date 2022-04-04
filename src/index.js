@@ -7,6 +7,7 @@ import Main from "./Main";
 import reportWebVitals from "./reportWebVitals";
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
+import 'react-notifications/lib/notifications.css';
 
 // import main sass file
 import "./sass/app.scss";

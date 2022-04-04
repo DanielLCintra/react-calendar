@@ -45,7 +45,7 @@ function ReminderRegisterModal(props) {
             }
             id="title" 
             name="title"
-            maxlength="30"
+            maxLength="30"
           />
         </div>
 

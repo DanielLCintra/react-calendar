@@ -4,7 +4,7 @@ Hello, welcome to the calendar app project.
 
 ## This project allows:
 
-1 - Add Reminders on espcific Date / Time and City. Obs: The reminder text can only have 30 characters maximum.
+1 - Add Reminders on especific Date / Time and City. Obs: The reminder text can only have 30 characters maximum.
 
 1.1 - When you put the city on reminders register form, it shows to you the weather forecast for day and city.
     Obs: To setup this integration, you will need to put on .env file the Weather Forecast Api URL and KEY.
