@@ -18,8 +18,6 @@ const calendarSlice = createSlice({
       const day = check.format('DD').toString();
       const year = check.format('YYYY').toString();
 
-      console.log('date', year + ' ' + month + ' ' + day)
-
       state.calendar[year][month].days
         .find((d) => d.day === day)
         .reminders.push({ id: Date.now() ,time, title, city, date });

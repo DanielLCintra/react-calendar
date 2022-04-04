@@ -6,11 +6,11 @@ import MonthDay from "../../components/MonthDay";
 import Button from "../../components/Button/index.jsx";
 import ReminderRegisterModal from "../../components/ReminderRegisterModal";
 
+
 function Calendar(props) {
   const { weekDays, calendar } = useSelector((state) => state.calendarReducer);
-  
-
   let [showRegisterModal, setShowRegisterModal] = useState(false);
+
 
   return (
     <div className="container">

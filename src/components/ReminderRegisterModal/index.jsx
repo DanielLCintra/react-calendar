@@ -4,20 +4,24 @@ import "./styles.scss";
 import Button from "../Button";
 import { addReminder } from "../../store/slices/calendar.slice";
 import { useDispatch } from "react-redux";
-import {REMINDER_MODEL} from '../../models/reminder'
+import { REMINDER_MODEL } from "../../models/reminder";
+import { getWeatherForecastByAddressAndDate } from "../../services/methods";
+import Weather from "../Weather/index.jsx";
 
 function ReminderRegisterModal(props) {
   const dispatch = useDispatch();
 
-  const { title = "Título do modal", handleClose, currentReminder } = props;
+  const { title = "modal`s title", handleClose, currentReminder } = props;
   let [reminder, setReminder] = useState({ ...REMINDER_MODEL });
+  let [weatherData, setweatherData] = useState("");
+
+  
 
   useEffect(() => {
     if (currentReminder?.id) {
-      setReminder(currentReminder)
+      setReminder(currentReminder);
     }
-  }, [currentReminder])
-  
+  }, [currentReminder]);
 
   return (
     <div className="modal-container">
@@ -34,7 +38,7 @@ function ReminderRegisterModal(props) {
           <input
             className="input-form"
             type="text"
-            value={reminder.title || ''}
+            value={reminder.title || ""}
             onChange={(e) =>
               setReminder({ ...reminder, title: e.target.value })
             }
@@ -43,38 +47,62 @@ function ReminderRegisterModal(props) {
 
         <div className="input-container">
           <label className="input-label">Date</label>
-          <input 
-            className="input-form" 
-            type="date" 
-            value={reminder.date || ''}
-            onChange={(e) =>
-              setReminder({ ...reminder, date: e.target.value })
-            }
+          <input
+            className="input-form"
+            type="date"
+            value={reminder.date || ""}
+            onChange={(e) => setReminder({ ...reminder, date: e.target.value })}
+            onBlur={async (e) => {
+              if (e.target.value && reminder.city) {
+                const weatherForecast = await getWeatherForecastByAddressAndDate(
+                  reminder.city,
+                  e.target.value,
+                  e.target.value
+                );
+                setweatherData(weatherForecast.data);
+              }
+            }}
           />
         </div>
 
         <div className="input-container">
           <label className="input-label">Time</label>
-          <input 
-            className="input-form" 
-            type="time" 
-            value={reminder.time || ''}
-            onChange={(e) =>
-              setReminder({ ...reminder, time: e.target.value })
-            }
+          <input
+            className="input-form"
+            type="time"
+            value={reminder.time || ""}
+            onChange={(e) => setReminder({ ...reminder, time: e.target.value })}
           />
         </div>
 
         <div className="input-container">
           <label className="input-label">City</label>
-          <input 
-            className="input-form" 
-            type="text" 
-            value={reminder.city || ''}
-            onChange={(e) =>
+          <input
+            className="input-form"
+            type="text"
+            value={reminder.city || ""}
+            onChange={async (e) =>
               setReminder({ ...reminder, city: e.target.value })
             }
+            onBlur={async (e) => {
+              if (e.target.value &&  reminder.date) {
+                const weatherForecast = await getWeatherForecastByAddressAndDate(
+                  e.target.value,
+                  reminder.date,
+                  reminder.date
+                );
+                setweatherData(weatherForecast.data);
+              }
+            }}
           />
+        </div>
+
+        <div className="input-container">
+          {!!weatherData ? (
+            <Weather data={weatherData} city={reminder.city} date={reminder.date}/>
+          ) : (
+            ""
+          )}
         </div>
       </div>
       <div className="modal-footer">
@@ -84,14 +112,12 @@ function ReminderRegisterModal(props) {
         <Button
           colorState="default"
           onClick={() => {
-            dispatch(
-              addReminder(reminder)
-            )
+            dispatch(addReminder(reminder));
 
-            setReminder({...REMINDER_MODEL})
+            setReminder({ ...REMINDER_MODEL });
           }}
         >
-          {currentReminder?.id ? 'Update' : 'Save'}
+          {currentReminder?.id ? "Update" : "Save"}
         </Button>
       </div>
     </div>

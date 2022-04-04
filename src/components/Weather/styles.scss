@@ -1,0 +1,35 @@
+@import '../../sass/colors.scss';
+
+.weather-container {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      align-items: center;
+      justify-content: flex-start;
+      .weather-city {
+            margin-left: 2em;
+            width: 100px;
+            margin-top: 0 !important;
+      }
+      .min-max-temperature-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin-top: 0 !important;
+            .min-temperature {
+                  font-size: 16px;
+                  font-weight: bold;
+                  margin-top: 0 !important;
+                  padding: 0;
+                  margin: 0 .2em;
+            }
+            .max-temperature {
+                  font-size: 26px;
+                  font-weight: bold;
+                  margin-top: 0 !important;
+                  padding: 0;
+                  margin: 0 .2em;
+            }
+      }     
+}
