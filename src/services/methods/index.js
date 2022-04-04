@@ -11,7 +11,7 @@ export const getWeatherForecastByAddressAndDate = async (address, minDate, maxDa
          
         }
       } catch (error) {
-       return {message: "Error on weather api request.", data: {}} 
+       return {message: "Error on weather api request. error: " + error, data: {}} 
       }
        
     }

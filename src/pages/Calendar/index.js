@@ -5,11 +5,13 @@ import "./styles.scss";
 import MonthDay from "../../components/MonthDay";
 import Button from "../../components/Button/index.jsx";
 import ReminderRegisterModal from "../../components/ReminderRegisterModal";
+import { toggleShowRegisterModal } from "../../store/slices/calendar.slice";
+import { useDispatch } from "react-redux";
 
 
 function Calendar(props) {
-  const { weekDays, calendar } = useSelector((state) => state.calendarReducer);
-  let [showRegisterModal, setShowRegisterModal] = useState(false);
+  const { weekDays, calendar, showRegisterModal } = useSelector((state) => state.calendarReducer);
+  const dispatch = useDispatch();
 
 
   return (
@@ -17,7 +19,7 @@ function Calendar(props) {
       {showRegisterModal && (
         <ReminderRegisterModal
           title="Reminder`s Register"
-          handleClose={() => setShowRegisterModal(false)}
+          handleClose={() => dispatch(toggleShowRegisterModal({state: false}))}
         />
       )}
       <h1>April - 2022</h1>
@@ -45,8 +47,7 @@ function Calendar(props) {
           <Button
             colorState="default"
             onClick={() =>
-              
-                setShowRegisterModal(true)
+              dispatch(toggleShowRegisterModal({state: true}))
             }
           >
             Add Reminder

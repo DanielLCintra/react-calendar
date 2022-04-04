@@ -2,20 +2,21 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import "./styles.scss";
 import Button from "../Button";
-import { addReminder } from "../../store/slices/calendar.slice";
+import { addReminder, updateReminder } from "../../store/slices/calendar.slice";
 import { useDispatch } from "react-redux";
 import { REMINDER_MODEL } from "../../models/reminder";
 import { getWeatherForecastByAddressAndDate } from "../../services/methods";
 import Weather from "../Weather/index.jsx";
+import { useSelector } from "react-redux";
 
 function ReminderRegisterModal(props) {
   const dispatch = useDispatch();
 
-  const { title = "modal`s title", handleClose, currentReminder } = props;
+  const { title = "modal`s title", handleClose } = props;
   let [reminder, setReminder] = useState({ ...REMINDER_MODEL });
   let [weatherData, setweatherData] = useState("");
 
-  
+  const { currentReminder } = useSelector((state) => state.calendarReducer);
 
   useEffect(() => {
     if (currentReminder?.id) {
@@ -112,8 +113,7 @@ function ReminderRegisterModal(props) {
         <Button
           colorState="default"
           onClick={() => {
-            dispatch(addReminder(reminder));
-
+            currentReminder?.id ? dispatch(updateReminder(reminder)) : dispatch(addReminder(reminder))
             setReminder({ ...REMINDER_MODEL });
           }}
         >
